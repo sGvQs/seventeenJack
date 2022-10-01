@@ -24,7 +24,7 @@ function Audio() {
 
   return (
     <div>
-      <audio className="audio" src="../src/audio/y2mate.com - THE BEST OF BILL EVANS FULL ALBUM.mp3" id='audio'></audio>
+      <audio className="audio" src="/src/audio/y2mate.com - THE BEST OF BILL EVANS FULL ALBUM.mp3" id='audio'></audio>
       <div onClick={audioMode} className='white'>
         {!isPlay && <FontAwesomeIcon className="playIcon" icon={faPlay} />}
         {isPlay && <FontAwesomeIcon className='playIcon' icon={faPause}/>}
