@@ -1,0 +1,137 @@
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.card-wrap {
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.card-left {
+  filter: drop-shadow(0 0 0.75rem rgb(39, 39, 39));
+  -webkit-filter: drop-shadow(0 0 0.75rem rgb(39, 39, 39));
+  transition: all .5s;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+}
+
+.card-left:hover, .card-right:hover{
+  filter: drop-shadow(0 0 2rem rgb(0, 0, 0));
+}
+
+.card-right {
+  filter: drop-shadow(0 0 0.75rem rgb(39, 39, 39));
+  transition: all .5s;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+}
+
+.right-content {
+  margin-left: 20px;
+}
+
+@font-face {
+  font-family: neon;
+  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+}
+
+.container {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.neon {
+  margin-top: 100px;
+  font-family: neon;
+  color: #FB4264;
+  font-size: 70px;
+  line-height: 9vw;
+  text-shadow: 0 0 3vw #F40A35;
+}
+
+.neon {
+  animation: neon 10s linear infinite;
+  -moz-animation: neon 10s linear infinite;
+  -webkit-animation: neon 10s linear infinite;
+  -o-animation: neon 10s linear infinite;
+}
+
+@keyframes neon {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
+    color: #FED128;
+  }
+  50% {
+    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+    color: #806914;
+  }
+}
+
+.button {
+  padding: 10px 15px 10px 15px;
+  filter: drop-shadow(0 0 0.7rem #F40A35);
+  background-color: #F40A35;
+  color: #FED128;
+  font-size: 20px;
+  font-weight: bold;
+  -webkit-filter: drop-shadow(0 0 0.7rem #F40A35);
+  transition: .5s;
+  -webkit-transition: .5s;
+  -moz-transition: .5s;
+  -ms-transition: .5s;
+  -o-transition: .5s;
+}
+
+.button:hover {
+  text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128;
+}
+
+.button-warp {
+  margin-top: 70px;
+}
+
+.selected {
+  opacity: .1;
+}
+
+.enabled {
+  opacity: .1;
+}
+
+.card-size {
+  width: 200px;
+}
+
+.enemy-card-wrap {
+  margin-top: 60px;
+  width: 50vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.side-enemy {
+  display: flex;
+}
+
+.enemy-card-left {
+  display: block;
+  width: 40px;
+}
+
+.enemy-card-right {
+  margin-left: 10px;
+  display: block;
+  width: 40px;
+}
+
