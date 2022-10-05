@@ -7,13 +7,17 @@ function Audio() {
 
   let [isPlay, playFlag] = useState(false);
 
-  function audioMode() {
+  async function audioMode(){
     
     const audioButton = document.getElementById("audio") as HTMLMediaElement;
 
     if(isPlay === false){
-      audioButton?.play();
       playFlag(true);
+      try {
+        await audioButton?.play();
+      } catch (e){
+        console.log(e);
+      }
     };
 
     if(isPlay === true){

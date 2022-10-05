@@ -8,7 +8,7 @@
 }
 
 .card-wrap {
-  margin-top: 0px;
+  margin-top: -30px;
   display: flex;
   justify-content: center;
 }
@@ -51,10 +51,9 @@
 }
 
 .neon {
-  margin-top: 100px;
   font-family: neon;
   color: #FB4264;
-  font-size: 70px;
+  font-size: 50px;
   line-height: 9vw;
   text-shadow: 0 0 3vw #F40A35;
 }
@@ -79,11 +78,12 @@
 }
 
 .button {
+  margin-top: 10px;
   padding: 10px 15px 10px 15px;
   filter: drop-shadow(0 0 0.7rem #F40A35);
   background-color: #F40A35;
   color: #FED128;
-  font-size: 20px;
+  font-size: 13px;
   font-weight: bold;
   -webkit-filter: drop-shadow(0 0 0.7rem #F40A35);
   transition: .5s;
@@ -115,7 +115,7 @@
 
 .enemy-card-wrap {
   margin-top: 60px;
-  width: 50vw;
+  width: 60vw;
   display: flex;
   justify-content: space-between;
 }
@@ -126,12 +126,12 @@
 
 .enemy-card-left {
   display: block;
-  width: 40px;
+  width: 65px;
 }
 
 .enemy-card-right {
   margin-left: 10px;
   display: block;
-  width: 40px;
+  width: 65px;
 }
 

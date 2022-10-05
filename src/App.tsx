@@ -18,6 +18,7 @@ function App() {
   let [enemyScore, enemyValue] = useState(0);
   let [result, resultValue] = useState("");
   let [showResult, displayResult] = useState(false);
+  const [played, calledPlayed] = useState(false);
   const [count, setCount] = useState(0);
   const [disable, setDisable] = useState(true);
 
@@ -29,6 +30,10 @@ function App() {
   },[])
 
   async function callApi() {
+      if(played === true){
+        return;
+      }
+      calledPlayed(true);
       const res = await fetch("https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
       if(res.status === 200){
         const useRes = await res.json();
@@ -390,7 +395,7 @@ function App() {
 
     setTimeout(() => {
       displayResult(true);
-    }, 4000);
+    }, 4500);
   }
 
   function RandArray(array: string | any[]){
@@ -410,6 +415,7 @@ const refresh = () => {
   displayResult(false);
   setCount(0);
   setDisable(true);
+  calledPlayed(false);
   let leftObject = document.getElementById("leftObject");
   let rightObject = document.getElementById("rightObject");
   leftObject?.firstElementChild?.remove();
