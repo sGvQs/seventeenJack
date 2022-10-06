@@ -8,27 +8,27 @@ function Audio() {
   let [isPlay, playFlag] = useState(false);
 
   async function audioMode(){
-    
-    const audioButton = document.getElementById("audio") as HTMLMediaElement;
+
+    const music = document.getElementById("audio") as HTMLMediaElement;
 
     if(isPlay === false){
       playFlag(true);
       try {
-        await audioButton?.play();
+        await music?.play();
       } catch (e){
         console.log(e);
       }
     };
 
     if(isPlay === true){
-      audioButton?.pause();
+      music?.pause();
       playFlag(false);
     }
   }
 
   return (
     <div>
-      <audio className="audio" src="/src/audio/y2mate.com - THE BEST OF BILL EVANS FULL ALBUM.mp3" id='audio'></audio>
+      <audio id="audio" src="src/audio/► FNV Old World Blues DLC_ Mysterious Broadcast Instrumentals (Jazz) - from YouTube.mp3"></audio>
       <div onClick={audioMode} className='white'>
         {!isPlay && <FontAwesomeIcon className="playIcon" icon={faPlay} />}
         {isPlay && <FontAwesomeIcon className='playIcon' icon={faPause}/>}
