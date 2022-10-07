@@ -29,7 +29,7 @@ function Audio() {
 
   return (
     <div>
-      <audio controls id="audio" src="../../audio/► FNV Old World Blues DLC_ Mysterious Broadcast Instrumentals (Jazz) - from YouTube.mp3"></audio>
+      <audio id="audio" src="../../audio/► FNV Old World Blues DLC_ Mysterious Broadcast Instrumentals (Jazz) - from YouTube.mp3"></audio>
       <div onClick={audioMode} className='white'>
         {!isPlay && <FontAwesomeIcon className="playIcon" icon={faPlay} />}
         {isPlay && <FontAwesomeIcon className='playIcon' icon={faPause}/>}
