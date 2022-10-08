@@ -8,7 +8,6 @@
 }
 
 .card-wrap {
-  margin-top: -30px;
   display: flex;
   justify-content: center;
 }
@@ -16,24 +15,25 @@
 .card-left {
   filter: drop-shadow(0 0 0.75rem rgb(39, 39, 39));
   -webkit-filter: drop-shadow(0 0 0.75rem rgb(39, 39, 39));
-  transition: all .5s;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  -ms-transition: all .5s;
-  -o-transition: all .5s;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
 }
 
-.card-left:hover, .card-right:hover{
+.card-left:hover,
+.card-right:hover {
   filter: drop-shadow(0 0 2rem rgb(0, 0, 0));
 }
 
 .card-right {
   filter: drop-shadow(0 0 0.75rem rgb(39, 39, 39));
-  transition: all .5s;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  -ms-transition: all .5s;
-  -o-transition: all .5s;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
 }
 
 .right-content {
@@ -52,10 +52,10 @@
 
 .neon {
   font-family: neon;
-  color: #FB4264;
+  color: #fb4264;
   font-size: 50px;
   line-height: 9vw;
-  text-shadow: 0 0 3vw #F40A35;
+  text-shadow: 0 0 3vw #f40a35;
 }
 
 .neon {
@@ -68,33 +68,36 @@
 @keyframes neon {
   0%,
   100% {
-    text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
-    color: #FED128;
+    text-shadow: 0 0 1vw #fa1c16, 0 0 3vw #fa1c16, 0 0 10vw #fa1c16,
+      0 0 10vw #fa1c16, 0 0 0.4vw #fed128, 0.5vw 0.5vw 0.1vw #806914;
+    color: #fed128;
   }
   50% {
-    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+    text-shadow: 0 0 0.5vw #800e0b, 0 0 1.5vw #800e0b, 0 0 5vw #800e0b,
+      0 0 5vw #800e0b, 0 0 0.2vw #800e0b, 0.5vw 0.5vw 0.1vw #40340a;
     color: #806914;
   }
 }
 
 .button {
-  margin-top: 10px;
   padding: 10px 15px 10px 15px;
-  filter: drop-shadow(0 0 0.7rem #F40A35);
-  background-color: #F40A35;
-  color: #FED128;
+  filter: drop-shadow(0 0 0.7rem #f40a35);
+  background-color: #f40a35;
+  color: #fed128;
   font-size: 13px;
-  font-weight: bold;
-  -webkit-filter: drop-shadow(0 0 0.7rem #F40A35);
-  transition: .5s;
-  -webkit-transition: .5s;
-  -moz-transition: .5s;
-  -ms-transition: .5s;
-  -o-transition: .5s;
+  font-weight: 900;
+  font-family: YohaKutoJP, 'Hiragino Sans', 'Yu Gothic', YuGothic, sans-serif;
+  -webkit-filter: drop-shadow(0 0 0.7rem #f40a35);
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
 }
 
 .button:hover {
-  text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128;
+  text-shadow: 0 0 1vw #fa1c16, 0 0 3vw #fa1c16, 0 0 10vw #fa1c16,
+    0 0 10vw #fa1c16, 0 0 0.4vw #fed128;
 }
 
 .button-warp {
@@ -102,15 +105,15 @@
 }
 
 .selected {
-  opacity: .1;
+  opacity: 0.1;
 }
 
 .enabled {
-  opacity: .1;
+  opacity: 0.1;
 }
 
 .card-size {
-  width: 200px;
+  width: 100px;
 }
 
 .enemy-card-wrap {
@@ -126,12 +129,16 @@
 
 .enemy-card-left {
   display: block;
-  width: 65px;
+  width: 50px;
 }
 
 .enemy-card-right {
   margin-left: 10px;
   display: block;
-  width: 65px;
+  width: 50px;
 }
 
+.winner-shodow {
+  filter: drop-shadow(0 0mm 5mm rgb(210, 168, 0));
+  -webkit-filter: drop-shadow(0 0mm 5mm rgb(210, 168, 0));
+}

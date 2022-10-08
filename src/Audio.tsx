@@ -28,7 +28,8 @@ function Audio() {
   }
 
   return (
-    <div>
+    // 反映できないので一時的に退避
+    <div style={{display: 'none'}}>
       <audio id="audio" src="../../audio/► FNV Old World Blues DLC_ Mysterious Broadcast Instrumentals (Jazz) - from YouTube.mp3"></audio>
       <div onClick={audioMode} className='white'>
         {!isPlay && <FontAwesomeIcon className="playIcon" icon={faPlay} />}
