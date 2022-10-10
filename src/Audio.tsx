@@ -28,7 +28,7 @@ function Audio() {
     <div>
       <audio
         id="audio"
-        src="/src/assets/► FNV Old World Blues DLC_ Mysterious Broadcast Instrumentals (Jazz) - from YouTube.mp3"
+        src="/► FNV Old World Blues DLC_ Mysterious Broadcast Instrumentals (Jazz) - from YouTube.mp3"
       ></audio>
       <div onClick={audioMode} className="white">
         {!isPlay && <FontAwesomeIcon className="playIcon" icon={faPlay} />}
