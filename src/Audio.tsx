@@ -1,43 +1,41 @@
-import './Audio.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
+import './Audio.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 function Audio() {
-
   let [isPlay, playFlag] = useState(false);
 
-  async function audioMode(){
+  async function audioMode() {
+    const music = document.getElementById('audio') as HTMLMediaElement;
 
-    const music = document.getElementById("audio") as HTMLMediaElement;
-    //const music = new Audio(required('../audio/► FNV Old World Blues DLC_ Mysterious Broadcast Instrumentals (Jazz) - from YouTube'))
-
-    if(isPlay === false){
+    if (isPlay === false) {
       playFlag(true);
       try {
         await music?.play();
-      } catch (e){
+      } catch (e) {
         console.log(e);
       }
-    };
+    }
 
-    if(isPlay === true){
+    if (isPlay === true) {
       music?.pause();
       playFlag(false);
     }
   }
 
   return (
-    // 反映できないので一時的に退避
-    <div style={{display: 'none'}}>
-      <audio id="audio" src="../../audio/► FNV Old World Blues DLC_ Mysterious Broadcast Instrumentals (Jazz) - from YouTube.mp3"></audio>
-      <div onClick={audioMode} className='white'>
+    <div>
+      <audio
+        id="audio"
+        src="src/assets/► FNV Old World Blues DLC_ Mysterious Broadcast Instrumentals (Jazz) - from YouTube.mp3"
+      ></audio>
+      <div onClick={audioMode} className="white">
         {!isPlay && <FontAwesomeIcon className="playIcon" icon={faPlay} />}
-        {isPlay && <FontAwesomeIcon className='playIcon' icon={faPause}/>}
+        {isPlay && <FontAwesomeIcon className="playIcon" icon={faPause} />}
       </div>
     </div>
-  )
+  );
 }
 
-export default Audio
-
+export default Audio;
