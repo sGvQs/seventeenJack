@@ -1,0 +1,85 @@
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.card-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.card-left {
+  filter: drop-shadow(0 0 0.75rem rgb(39, 39, 39));
+  -webkit-filter: drop-shadow(0 0 0.75rem rgb(39, 39, 39));
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+}
+
+.card-left:hover,
+.card-right:hover {
+  filter: drop-shadow(0 0 2rem rgb(0, 0, 0));
+}
+
+.card-right {
+  filter: drop-shadow(0 0 0.75rem rgb(39, 39, 39));
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+}
+
+.container {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.button-warp {
+  margin-top: 70px;
+}
+
+.selected {
+  opacity: 0.1;
+}
+
+.enabled {
+  opacity: 0.1;
+}
+
+.card-size {
+  width: 100px;
+}
+
+.enemy-card-wrap {
+  margin-top: 60px;
+  width: 60vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.side-enemy {
+  display: flex;
+}
+
+.enemy-card-left {
+  display: block;
+  width: 50px;
+}
+
+.enemy-card-right {
+  margin-left: 10px;
+  display: block;
+  width: 50px;
+}
+
+.winner-shodow {
+  filter: drop-shadow(0 0mm 5mm rgb(210, 168, 0));
+  -webkit-filter: drop-shadow(0 0mm 5mm rgb(210, 168, 0));
+}
