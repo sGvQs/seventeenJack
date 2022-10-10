@@ -5,7 +5,7 @@ const Home = () => {
     <>
       <div>
         <img
-          src="./assets/johnny_automatic_card_trick.svg"
+          src="/src/assets/johnny_automatic_card_trick.svg"
           alt=""
           style={{ height: '30vh' }}
         />
