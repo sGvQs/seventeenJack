@@ -56,3 +56,10 @@
 .right-content {
   margin-left: 20px;
 }
+
+@media screen and (max-width: 800px) {
+  .button {
+    padding: 5px 10px 5px 10px;
+    font-size: 8px;
+  }
+}
