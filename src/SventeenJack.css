@@ -83,3 +83,20 @@
   filter: drop-shadow(0 0mm 5mm rgb(210, 168, 0));
   -webkit-filter: drop-shadow(0 0mm 5mm rgb(210, 168, 0));
 }
+
+@media screen and (max-width: 800px) {
+  .card-wrap {
+    margin-top: 20px;
+  }
+  .enemy-card-wrap {
+    width: 100vw;
+  }
+
+  .result-title {
+    margin-top: 20px;
+  }
+
+  .return-button {
+    margin-top: 20px;
+  }
+}

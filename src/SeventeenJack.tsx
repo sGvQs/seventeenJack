@@ -42,8 +42,8 @@ function SeventeenJack() {
       let id = await useRes.deck_id;
       deckId = await id;
       await idValue(id);
+      await displayStart(false);
       await drowCard(2, '');
-      return displayStart(false);
     } else {
       const app = document.getElementById('app');
       while (app?.firstChild) {
@@ -81,6 +81,8 @@ function SeventeenJack() {
       await leftValue(leftNumber);
 
       leftImg.src = await `${leftCard}`;
+      leftImg.style.width = await '100px';
+
       await leftObject?.appendChild(leftImg);
 
       // RightCard
@@ -90,7 +92,11 @@ function SeventeenJack() {
       await rightValue(rightNumber);
 
       rightImg.src = await `${rightCard}`;
-      await rightObject?.appendChild(rightImg);
+      rightImg.style.width = await '100px';
+      setTimeout(() => {
+        rightObject?.appendChild(rightImg);
+      }, 3000);
+      //await rightObject?.appendChild(rightImg);
 
       return displayGame(true);
     }
@@ -102,6 +108,7 @@ function SeventeenJack() {
       await leftValue(leftNumber);
 
       leftImg.src = await `${leftCard}`;
+      leftImg.style.width = await '100px';
       await leftObject?.appendChild(leftImg);
     }
 
@@ -112,6 +119,7 @@ function SeventeenJack() {
       await rightValue(rightNumber);
 
       rightImg.src = await `${rightCard}`;
+      rightImg.style.width = await '100px';
       await rightObject?.appendChild(rightImg);
     }
   }
@@ -456,7 +464,7 @@ function SeventeenJack() {
         </div>
       )}
       <div className="card-wrap">
-        {isStarted && (
+        {isStarted ? (
           <>
             <button className="button" onClick={callApi}>
               PLAY
@@ -465,18 +473,31 @@ function SeventeenJack() {
               <button className="button">HOME</button>
             </Link>
           </>
+        ) : (
+          <>
+            <div
+              className="card-left"
+              id="leftObject"
+              onClick={changeLeft}
+            ></div>
+            <div
+              className="card-right right-content"
+              id="rightObject"
+              onClick={changeRight}
+            ></div>
+          </>
         )}
-        <div className="card-left" id="leftObject" onClick={changeLeft}></div>
+        {/* <div className="card-left" id="leftObject" onClick={changeLeft}></div>
         <div
           className="card-right right-content"
           id="rightObject"
           onClick={changeRight}
-        ></div>
+        ></div> */}
       </div>
       <div>
-        {showResult && <div className="neon">{result}</div>}
+        {showResult && <div className="neon result-title">{result}</div>}
         {showResult && (
-          <button className="button" onClick={refresh}>
+          <button className="button return-button" onClick={refresh}>
             BACK TO TITLE
           </button>
         )}
