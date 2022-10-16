@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import './Home.css';
 
 const Home = () => {
   return (
@@ -13,14 +14,14 @@ const Home = () => {
       <div className="neon" style={{ margin: '20px 0 0 0' }}>
         JACK STUDIOS
       </div>
-      <div style={{ margin: '60px 0 0 0' }}>
+      <div className="page-button-wrap">
         <Link to={`/SeventeenJack`}>
           <button className="button">SEVENTEEN JACK</button>
         </Link>
-        <Link to={`/`} className="right-content">
+        <Link to={`/`} className="right-content not-firstchild">
           <button className="button">COMING SOON...</button>
         </Link>
-        <Link to={`/`} className="right-content">
+        <Link to={`/`} className="right-content not-firstchild">
           <button className="button">COMING SOON...</button>
         </Link>
       </div>
