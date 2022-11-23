@@ -7,9 +7,10 @@ export const SeventeenJack = () => {
   const [deckId, setDeckId] = useState<string>();
   const deckIdRef = useRef();
 
-  const [leftCard, left] = useState<string>();
+  const [leftCard, setLeftCard] = useState<string>();
+  const [rightCard, setRightCard] = useState<string>();
+
   const [leftNum, leftValue] = useState<string>();
-  const [rightCard, right] = useState<string>();
   const [rightNum, rightValue] = useState<string>();
   const [isStarted, displayStart] = useState<boolean>(true);
   const [setGame, displayGame] = useState<boolean>();
@@ -21,7 +22,7 @@ export const SeventeenJack = () => {
   const [enemyScore, enemyValue] = useState<number>();
   const [result, resultValue] = useState<string>();
   const [showResult, displayResult] = useState<boolean>(false);
-  const [played, calledPlayed] = useState<boolean>(false);
+  const [played, setPlayed] = useState<boolean>(false);
   const [count, setCount] = useState<number>();
   const [disable, setDisable] = useState<boolean>(true);
 
@@ -33,13 +34,12 @@ export const SeventeenJack = () => {
   }, []);
 
   const callApi = async () => {
-    if (played === true) {
-      return;
-    }
-    calledPlayed(true);
+    if (played === true) return;
+    setPlayed(true);
     const res = await fetch(
       'https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1'
     );
+    console.log(res);
     if (res.status === 200) {
       const useRes = await res.json();
       deckIdRef.current = useRes.deck_id;
@@ -70,8 +70,10 @@ export const SeventeenJack = () => {
         respose
           .then((res) => {
             const cardImgObject = {
+              amountOfDrowing: number,
               rightCard: res.cards[0].image,
               leftCard: res.cards[1].image,
+              sideOfCard: side,
             };
             createImgElement(cardImgObject);
           })
@@ -84,16 +86,54 @@ export const SeventeenJack = () => {
         console.error(e);
         alert('サーバーエラーが発生しました。');
       });
-    // const useRes = await res.json();
+  };
 
-    // let leftNumber = '';
-    // let rightNumber = '';
+  interface CardImgObjectProps {
+    amountOfDrowing: number;
+    rightCard: string;
+    leftCard: string;
+    sideOfCard: string;
+  }
 
-    // let leftImg = await document.createElement('img');
-    // let rightImg = await document.createElement('img');
+  const createImgElement = (cardImgObject: CardImgObjectProps) => {
+    const leftImg = document.createElement('img');
+    const rightImg = document.createElement('img');
 
-    // let leftObject = document.getElementById('leftObject');
-    // let rightObject = document.getElementById('rightObject');
+    const leftObject = document.getElementById('leftObject');
+    const rightObject = document.getElementById('rightObject');
+
+    if (cardImgObject.sideOfCard === 'left') {
+      setLeftCard(cardImgObject.leftCard);
+
+      leftImg.src = `${leftCard}`;
+      leftImg.style.width = '100px';
+      leftObject?.appendChild(leftImg);
+
+      return;
+    }
+
+    if (cardImgObject.sideOfCard === 'right') {
+      setRightCard(cardImgObject.rightCard);
+
+      rightImg.src = `${rightCard}`;
+      rightImg.style.width = '100px';
+      rightObject?.appendChild(rightImg);
+
+      return;
+    }
+
+    console.log(cardImgObject.leftCard);
+
+    setLeftCard(cardImgObject.leftCard);
+    setRightCard(cardImgObject.rightCard);
+
+    leftImg.src = `${cardImgObject.leftCard}`;
+    leftImg.style.width = '100px';
+    leftObject?.appendChild(leftImg);
+
+    rightImg.src = `${cardImgObject.rightCard}`;
+    rightImg.style.width = '100px';
+    rightObject?.appendChild(rightImg);
 
     // if (number === 2) {
     //   // leftCard
@@ -147,113 +187,99 @@ export const SeventeenJack = () => {
     // }
   };
 
-  interface CardImgObject {
-    rightCard: string;
-    leftCard: string;
-  }
+  // function changeLeft() {
+  //   if (setGame === false) {
+  //     return;
+  //   }
+  //   if (count === 2) {
+  //     return;
+  //   }
+  //   return leftSelected(!isLeftSelected);
+  // }
 
-  const createImgElement = (cardImgObject: CardImgObject) => {
-    console.log(cardImgObject.leftCard);
-    let leftImg = document.createElement('img');
-    let rightImg = document.createElement('img');
+  // const changeButton = document.getElementById('changeButton');
+  // const openButton = document.getElementById('openButton');
 
-    let leftObject = document.getElementById('leftObject');
-    let rightObject = document.getElementById('rightObject');
-  };
+  // // when left card selected
+  // useEffect(() => {
+  //   const leftCard = document.getElementById('leftObject');
 
-  function changeLeft() {
-    if (setGame === false) {
-      return;
-    }
-    if (count === 2) {
-      return;
-    }
-    return leftSelected(!isLeftSelected);
-  }
+  //   // watching the leftCard selected
+  //   if (isLeftSelected === true) {
+  //     leftCard?.classList.add('selected');
+  //   } else {
+  //     leftCard?.classList.remove('selected');
+  //   }
 
-  const changeButton = document.getElementById('changeButton');
-  const openButton = document.getElementById('openButton');
+  //   // style of change-button
+  //   // disabled change-button
+  //   if (isLeftSelected === false && isRightSelected === false) {
+  //     changeButton?.classList.add('enabled');
+  //     openButton?.classList.remove('enabled');
+  //     setDisable(true);
+  //   } else {
+  //     changeButton?.classList.remove('enabled');
+  //     openButton?.classList.add('enabled');
+  //     setDisable(false);
+  //   }
+  // }, [isLeftSelected]);
 
-  // when left card selected
-  useEffect(() => {
-    const leftCard = document.getElementById('leftObject');
+  // function changeRight() {
+  //   if (setGame === false) {
+  //     return;
+  //   }
+  //   if (count === 2) {
+  //     return;
+  //   }
+  //   return rightSelected(!isRightSelected);
+  // }
 
-    // watching the leftCard selected
-    if (isLeftSelected === true) {
-      leftCard?.classList.add('selected');
-    } else {
-      leftCard?.classList.remove('selected');
-    }
+  // // when right card selected
+  // useEffect(() => {
+  //   const rightCard = document.getElementById('rightObject');
 
-    // style of change-button
-    // disabled change-button
-    if (isLeftSelected === false && isRightSelected === false) {
-      changeButton?.classList.add('enabled');
-      openButton?.classList.remove('enabled');
-      setDisable(true);
-    } else {
-      changeButton?.classList.remove('enabled');
-      openButton?.classList.add('enabled');
-      setDisable(false);
-    }
-  }, [isLeftSelected]);
+  //   // watching the rightCard selected
+  //   if (isRightSelected === true) {
+  //     rightCard?.classList.add('selected');
+  //   } else {
+  //     rightCard?.classList.remove('selected');
+  //   }
 
-  function changeRight() {
-    if (setGame === false) {
-      return;
-    }
-    if (count === 2) {
-      return;
-    }
-    return rightSelected(!isRightSelected);
-  }
+  //   // style of change-button
+  //   // disabled change-button
+  //   if (isLeftSelected === false && isRightSelected === false) {
+  //     changeButton?.classList.add('enabled');
+  //     openButton?.classList.remove('enabled');
+  //     setDisable(true);
+  //   } else {
+  //     changeButton?.classList.remove('enabled');
+  //     openButton?.classList.add('enabled');
+  //     setDisable(false);
+  //   }
+  // }, [isRightSelected]);
 
-  // when right card selected
-  useEffect(() => {
-    const rightCard = document.getElementById('rightObject');
+  // function changeCards() {
+  //   let leftObject = document.getElementById('leftObject');
+  //   let rightObject = document.getElementById('rightObject');
 
-    // watching the rightCard selected
-    if (isRightSelected === true) {
-      rightCard?.classList.add('selected');
-    } else {
-      rightCard?.classList.remove('selected');
-    }
+  //   if (isLeftSelected === true && isRightSelected === true) {
+  //     leftObject?.firstElementChild?.remove();
+  //     rightObject?.firstElementChild?.remove();
+  //     changeLeft();
+  //     changeRight();
+  //     drowCard(2, '');
+  //   } else if (isLeftSelected === true) {
+  //     changeLeft();
+  //     leftObject?.firstElementChild?.remove();
+  //     drowCard(1, 'left');
+  //   } else if (isRightSelected === true) {
+  //     changeRight();
+  //     rightObject?.firstElementChild?.remove();
+  //     drowCard(1, 'right');
+  //   }
 
-    // style of change-button
-    // disabled change-button
-    if (isLeftSelected === false && isRightSelected === false) {
-      changeButton?.classList.add('enabled');
-      openButton?.classList.remove('enabled');
-      setDisable(true);
-    } else {
-      changeButton?.classList.remove('enabled');
-      openButton?.classList.add('enabled');
-      setDisable(false);
-    }
-  }, [isRightSelected]);
-
-  function changeCards() {
-    let leftObject = document.getElementById('leftObject');
-    let rightObject = document.getElementById('rightObject');
-
-    if (isLeftSelected === true && isRightSelected === true) {
-      leftObject?.firstElementChild?.remove();
-      rightObject?.firstElementChild?.remove();
-      changeLeft();
-      changeRight();
-      drowCard(2, '');
-    } else if (isLeftSelected === true) {
-      changeLeft();
-      leftObject?.firstElementChild?.remove();
-      drowCard(1, 'left');
-    } else if (isRightSelected === true) {
-      changeRight();
-      rightObject?.firstElementChild?.remove();
-      drowCard(1, 'right');
-    }
-
-    setCount(count && count + 1);
-  }
+  //   setCount(count && count + 1);
+  // }
 
   // function open() {
   //   let firstCard = 0;
@@ -451,16 +477,13 @@ export const SeventeenJack = () => {
 
   const refresh = () => {
     setDeckId('');
-    left('');
     leftValue('');
-    right('');
     rightValue('');
     displayStart(true);
     displayGame(false);
     displayResult(false);
     setCount(0);
     setDisable(true);
-    calledPlayed(false);
     let leftObject = document.getElementById('leftObject');
     let rightObject = document.getElementById('rightObject');
     leftObject?.firstElementChild?.remove();
@@ -517,12 +540,12 @@ export const SeventeenJack = () => {
             <div
               className="card-left"
               id="leftObject"
-              onClick={changeLeft}
+              // onClick={changeLeft}
             ></div>
             <div
               className="card-right right-content"
               id="rightObject"
-              onClick={changeRight}
+              // onClick={changeRight}
             ></div>
           </>
         )}
@@ -539,13 +562,14 @@ export const SeventeenJack = () => {
       </div>
       <div className="button-warp">
         {setGame && (
-          <Button
-            id="changeButton"
-            label={'CHANGE'}
-            disabled={disable}
-            onClickHandler={changeCards}
-            rightContent={false}
-          />
+          // <Button
+          //   id="changeButton"
+          //   label={'CHANGE'}
+          //   disabled={disable}
+          //   onClickHandler={changeCards}
+          //   rightContent={false}
+          // />
+          <></>
         )}
         {setGame && (
           <Button
