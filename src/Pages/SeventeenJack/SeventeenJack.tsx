@@ -36,63 +36,67 @@ export const SeventeenJack = () => {
   const callApi = async () => {
     if (played === true) return;
     setPlayed(true);
-    const res = await fetch(
-      'https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1'
-    );
-    console.log(res);
-    if (res.status === 200) {
-      const useRes = await res.json();
-      deckIdRef.current = useRes.deck_id;
-
-      await setDeckId(useRes.deck_id);
-      await displayStart(false);
-      await drowCard(2, '');
-    } else {
-      const app = document.getElementById('app');
-      while (app?.firstChild) {
-        app?.removeChild(app?.firstChild);
-      }
-      const img = document.createElement('img');
-      img.style.width = '100vw';
-      img.style.height = '100vh';
-      img.style.display = 'block';
-      img.src = `https://http.cat/${res.status}.jpg`;
-      app?.appendChild(img);
-    }
+    fetch('https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+      .then((res) => {
+        const respose = res.json();
+        respose.then((res) => {
+          deckIdRef.current = res.deck_id;
+          setDeckId(deckIdRef.current);
+          displayStart(false);
+          drowCard(2);
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+        alert('サーバーで予期せぬエラーが発生しました');
+        const app = document.getElementById('app');
+        while (app?.firstChild) {
+          app?.removeChild(app?.firstChild);
+        }
+        const img = document.createElement('img');
+        img.style.width = '100vw';
+        img.style.height = '100vh';
+        img.style.display = 'block';
+        img.src = `https://http.cat/${e.status}.jpg`;
+        app?.appendChild(img);
+      });
   };
 
-  const drowCard = async (number: number, side: string) => {
+  const drowCard = async (number: number, side?: string) => {
     fetch(
       `https://deckofcardsapi.com/api/deck/${deckIdRef.current}/draw/?count=${number}`
     )
       .then((res) => {
         const respose = res.json();
-        respose
-          .then((res) => {
-            const cardImgObject = {
-              amountOfDrowing: number,
-              rightCard: res.cards[0].image,
-              leftCard: res.cards[1].image,
-              sideOfCard: side,
-            };
-            createImgElement(cardImgObject);
-          })
-          .catch((e) => {
-            console.error(e);
-            alert('サーバーへの接触時にエラーが発生しました。');
-          });
+        respose.then((res) => {
+          const cardImgObject = {
+            rightCard: res.cards[0].image,
+            leftCard: res.cards[1].image,
+            sideOfCard: side,
+          };
+          createImgElement(cardImgObject);
+        });
       })
       .catch((e) => {
         console.error(e);
         alert('サーバーエラーが発生しました。');
+        const app = document.getElementById('app');
+        while (app?.firstChild) {
+          app?.removeChild(app?.firstChild);
+        }
+        const img = document.createElement('img');
+        img.style.width = '100vw';
+        img.style.height = '100vh';
+        img.style.display = 'block';
+        img.src = `https://http.cat/${e.status}.jpg`;
+        app?.appendChild(img);
       });
   };
 
   interface CardImgObjectProps {
-    amountOfDrowing: number;
     rightCard: string;
     leftCard: string;
-    sideOfCard: string;
+    sideOfCard?: string;
   }
 
   const createImgElement = (cardImgObject: CardImgObjectProps) => {
