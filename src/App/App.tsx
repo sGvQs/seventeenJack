@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import SeventeenJack from '../Pages/SeventeenJack/SeventeenJack';
-import Home from '../Pages/Home/Home';
+import SeventeenJack from '../Pages/SeventeenJack';
+import Home from '../Pages/Home';
 
 function App() {
   return (

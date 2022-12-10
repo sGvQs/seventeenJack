@@ -2,7 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../Components/common/Button';
 import { Card } from '../../Components/common/Card';
-import './SventeenJack.css';
+import { Neon } from '../../Components/common/Neon';
+import {
+  StyledButtonWrap,
+  StyledCardWrap,
+  StyledContainer,
+  StyledEnemyCardWrap,
+  StyledResultWrap,
+  StyledSingleUnitCards,
+} from './styled';
 
 export const SeventeenJack = () => {
   const [isStarted, setIsStart] = React.useState<boolean>(false);
@@ -213,80 +221,69 @@ export const SeventeenJack = () => {
 
   return (
     <div className="App" id="app">
-      <div className="container">
-        <div className="neon">SEVENTEEN JACK</div>
-      </div>
-      {isStarted && (
-        <div className="enemy-card-wrap">
-          <div className="side-enemy">
-            <Card isSelected={false} enemy src={firstSrc} />
-            <Card isSelected={false} enemy src={secondSrc} />
-          </div>
-          <div className="side-enemy">
-            <Card isSelected={false} enemy src={thirdSrc} />
-            <Card isSelected={false} enemy src={fourthSrc} />
-          </div>
-        </div>
-      )}
-      <div className="card-wrap">
+      <StyledContainer>
+        <Neon label={'SEVENTEEN JACK'} />
+        {isStarted && (
+          <StyledEnemyCardWrap>
+            <StyledSingleUnitCards>
+              <Card isSelected={false} enemy src={firstSrc} />
+              <Card isSelected={false} enemy src={secondSrc} />
+            </StyledSingleUnitCards>
+            <StyledSingleUnitCards>
+              <Card isSelected={false} enemy src={thirdSrc} />
+              <Card isSelected={false} enemy src={fourthSrc} />
+            </StyledSingleUnitCards>
+          </StyledEnemyCardWrap>
+        )}
         {!isStarted ? (
-          <>
-            <Button
-              label={'play'}
-              rightContent={false}
-              onClickHandler={() => drowCard(2)}
-            />
+          <StyledButtonWrap>
+            <Button label={'play'} onClickHandler={() => drowCard(2)} />
             <Link to={`/`} className="right-content">
-              <Button label={'HOME'} rightContent={true} />
+              <Button label={'HOME'} />
             </Link>
-          </>
+          </StyledButtonWrap>
         ) : (
-          <>
-            <Card
-              isSelected={isleftSelected}
-              onClickHandler={() => setIsLeftSelected((current) => !current)}
-              src={leftCardSrc}
-            />
-            <Card
-              isSelected={isRightSelected}
-              onClickHandler={() => setIsRightSelected((current) => !current)}
-              src={rightCardSrc}
-            />
-          </>
+          <StyledCardWrap>
+            <StyledSingleUnitCards>
+              <Card
+                isSelected={isleftSelected}
+                onClickHandler={() => setIsLeftSelected((current) => !current)}
+                src={leftCardSrc}
+                enemy={false}
+              />
+              <Card
+                isSelected={isRightSelected}
+                onClickHandler={() => setIsRightSelected((current) => !current)}
+                src={rightCardSrc}
+                enemy={false}
+              />
+            </StyledSingleUnitCards>
+          </StyledCardWrap>
         )}
-      </div>
-      <div>
-        {result && (
-          <>
-            <div className="neon result-title">{result}</div>
-            <Button
-              label={'BACK TO TITLE'}
-              rightContent={false}
-              onClickHandler={refrash}
-            />
-          </>
+        {result ? (
+          <StyledResultWrap>
+            <Neon label={result} />
+            <Button label={'BACK TO TITLE'} onClickHandler={refrash} />
+          </StyledResultWrap>
+        ) : (
+          isStarted && (
+            <StyledButtonWrap>
+              <Button
+                id="changeButton"
+                label={'CHANGE'}
+                disabled={!isRightSelected && !isleftSelected}
+                onClickHandler={changeCards}
+              />
+              <Button
+                id="openButton"
+                disabled={isRightSelected || isleftSelected}
+                onClickHandler={openCards}
+                label={'OPEN'}
+              />
+            </StyledButtonWrap>
+          )
         )}
-      </div>
-      <div className="button-warp">
-        {!result && isStarted && (
-          <>
-            <Button
-              id="changeButton"
-              label={'CHANGE'}
-              disabled={!isRightSelected && !isleftSelected}
-              onClickHandler={changeCards}
-              rightContent={false}
-            />
-            <Button
-              id="openButton"
-              disabled={isRightSelected || isleftSelected}
-              onClickHandler={openCards}
-              label={'OPEN'}
-              rightContent={true}
-            />
-          </>
-        )}
-      </div>
+      </StyledContainer>
     </div>
   );
 };

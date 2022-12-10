@@ -11,4 +11,5 @@ export const StyledCardWrap = styled.div<CardWrapProps>`
 
 export const StyledCardImg = styled.img<CardWrapProps>`
   ${(props) => props.enemy && `width: 50px;`}
+  ${(props) => props.enemy === false && `width: 150px;`}
 `;

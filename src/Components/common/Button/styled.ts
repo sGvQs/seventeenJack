@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledButton = styled.button<{ rightContent: boolean }>`
-  ${(props) => props.rightContent && `margin-left: 20px;`}
+export const StyledButton = styled.button`
   padding: 10px 15px 10px 15px;
   filter: drop-shadow(0 0 0.7rem #f40a35);
   background-color: #f40a35;
