@@ -5,8 +5,8 @@ import Audio from './Components/Audio/Audio';
 import './main.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  <>
     <Audio />
     <App />
-  </React.StrictMode>
+  </>
 );

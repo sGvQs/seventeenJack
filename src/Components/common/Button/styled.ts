@@ -1,6 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-import { Button } from '.';
 
 export const StyledButton = styled.button<{ rightContent: boolean }>`
   ${(props) => props.rightContent && `margin-left: 20px;`}
@@ -17,6 +15,10 @@ export const StyledButton = styled.button<{ rightContent: boolean }>`
   -moz-transition: 0.5s;
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
+
+  :disabled {
+    opacity: 0.4;
+  }
 
   :hover {
     text-shadow: 0 0 1vw #fa1c16, 0 0 3vw #fa1c16, 0 0 10vw #fa1c16,
