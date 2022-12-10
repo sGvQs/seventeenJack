@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../../Components/common/Button';
 import { Card } from '../../Components/common/Card';
 import { Neon } from '../../Components/common/Neon';
+import { useSeventeentJackStates } from './hooks';
 import {
   StyledButtonWrap,
   StyledCardWrap,
@@ -13,31 +14,53 @@ import {
 } from './styled';
 
 export const SeventeenJack = () => {
-  const [isStarted, setIsStart] = React.useState<boolean>(false);
-
-  const [deckId, setDeckId] = React.useState<string | undefined>();
-  const deckIdRef = React.useRef<string>();
-
-  const [leftCardSrc, setLeftCardSrc] = React.useState<string | undefined>();
-  const [rightCardSrc, setRightCardSrc] = React.useState<string | undefined>();
-
-  const [currentValue, setCurrentValue] = React.useState<number>();
-  const [currentEnemyValue, setCurrentEnemeyValue] = React.useState<number>();
-
-  const [isleftSelected, setIsLeftSelected] = React.useState<boolean>(false);
-  const [isRightSelected, setIsRightSelected] = React.useState<boolean>(false);
-
-  const [firstSrc, setFirstSrc] = React.useState<string | undefined>();
-  const [secondSrc, setSecondSrc] = React.useState<string | undefined>();
-  const [thirdSrc, setThirdSrc] = React.useState<string | undefined>();
-  const [fourthSrc, setFourthSrc] = React.useState<string | undefined>();
-
-  const [result, setResult] = React.useState<string>();
-  const [played, setPlayed] = React.useState<boolean>(false);
+  const {
+    firstSrc,
+    secondSrc,
+    isStarted,
+    thirdSrc,
+    isRightSelected,
+    isleftSelected,
+    fourthSrc,
+    played,
+    currentEnemyValue,
+    currentValue,
+    result,
+    deckId,
+    rightCardSrc,
+    deckIdRef,
+    leftCardSrc,
+    setDeckId,
+    setLeftCardSrc,
+    setResult,
+    setRightCardSrc,
+    setPlayed,
+    setCurrentValue,
+    setFourthSrc,
+    setCurrentEnemeyValue,
+    setIsStart,
+    setIsLeftSelected,
+    setThirdSrc,
+    setIsRightSelected,
+    setSecondSrc,
+    setFirstSrc,
+  } = useSeventeentJackStates();
 
   React.useEffect(() => {
     // 画面生成時
-    callApi();
+    if (played === true) return;
+    setPlayed(false);
+    fetch('https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+      .then((res) => {
+        const respose = res.json();
+        respose.then((res) => {
+          setDeckId(res.deck_id);
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+        alert('サーバーで予期せぬエラーが発生しました');
+      });
   }, []);
 
   React.useEffect(() => {
@@ -71,22 +94,6 @@ export const SeventeenJack = () => {
       default:
         return Number(number);
     }
-  };
-
-  const callApi = async () => {
-    if (played === true) return;
-    setPlayed(true);
-    fetch('https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
-      .then((res) => {
-        const respose = res.json();
-        respose.then((res) => {
-          setDeckId(res.deck_id);
-        });
-      })
-      .catch((e) => {
-        console.error(e);
-        alert('サーバーで予期せぬエラーが発生しました');
-      });
   };
 
   React.useEffect(() => {
@@ -224,20 +231,16 @@ export const SeventeenJack = () => {
       <StyledContainer>
         <Neon label={'SEVENTEEN JACK'} />
         {isStarted && (
-          <StyledEnemyCardWrap>
-            <StyledSingleUnitCards>
-              <Card isSelected={false} enemy src={firstSrc} />
-              <Card isSelected={false} enemy src={secondSrc} />
-            </StyledSingleUnitCards>
-            <StyledSingleUnitCards>
-              <Card isSelected={false} enemy src={thirdSrc} />
-              <Card isSelected={false} enemy src={fourthSrc} />
-            </StyledSingleUnitCards>
-          </StyledEnemyCardWrap>
+          <EnemyCardContainer
+            firstSrc={firstSrc}
+            secondSrc={secondSrc}
+            thirdSrc={thirdSrc}
+            fourthSrc={fourthSrc}
+          />
         )}
         {!isStarted ? (
           <StyledButtonWrap>
-            <Button label={'play'} onClickHandler={() => drowCard(2)} />
+            <Button label={'PLAY'} onClickHandler={() => drowCard(2)} />
             <Link to={`/`} className="right-content">
               <Button label={'HOME'} />
             </Link>
@@ -288,4 +291,29 @@ export const SeventeenJack = () => {
   );
 };
 
-export default SeventeenJack;
+type EnemyCardProps = {
+  firstSrc?: string;
+  secondSrc?: string;
+  thirdSrc?: string;
+  fourthSrc?: string;
+};
+
+export const EnemyCardContainer: React.FC<EnemyCardProps> = ({
+  firstSrc,
+  secondSrc,
+  thirdSrc,
+  fourthSrc,
+}) => {
+  return (
+    <StyledEnemyCardWrap>
+      <StyledSingleUnitCards>
+        <Card isSelected={false} enemy src={firstSrc} />
+        <Card isSelected={false} enemy src={secondSrc} />
+      </StyledSingleUnitCards>
+      <StyledSingleUnitCards>
+        <Card isSelected={false} enemy src={thirdSrc} />
+        <Card isSelected={false} enemy src={fourthSrc} />
+      </StyledSingleUnitCards>
+    </StyledEnemyCardWrap>
+  );
+};
