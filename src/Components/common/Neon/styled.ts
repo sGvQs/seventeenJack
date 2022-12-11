@@ -5,6 +5,7 @@ export const StyledNeon = styled.div`
     font-family: neon;
     src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
   }
+  text-align: center;
   font-family: neon;
   color: #fb4264;
   font-size: 50px;

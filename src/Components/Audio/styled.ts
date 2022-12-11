@@ -27,10 +27,8 @@ export const StyledAudioContainer = styled.div`
     cursor: pointer;
   }
   @media screen and (max-width: 800px) {
-    .white {
-      right: 20px;
-      bottom: 20px;
-    }
+    right: 20px;
+    bottom: 20px;
   }
 `;
 

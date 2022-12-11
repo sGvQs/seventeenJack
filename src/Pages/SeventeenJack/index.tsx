@@ -172,6 +172,12 @@ export const SeventeenJack = () => {
   };
 
   React.useEffect(() => {
+    setTimeout(() => {
+      calculateFinalResult();
+    }, 1500);
+  }, [currentEnemyValue]);
+
+  const calculateFinalResult = () => {
     if (!currentEnemyValue || !currentValue) return;
     if (currentValue > 17) {
       setResult('you lose');
@@ -186,7 +192,7 @@ export const SeventeenJack = () => {
     } else if (currentEnemyValue < currentValue) {
       setResult('you win');
     } else setResult('you lose');
-  }, [currentEnemyValue]);
+  };
 
   const calculateEnemyValue = (one: number, two: number) => {
     if (one === 17) {
