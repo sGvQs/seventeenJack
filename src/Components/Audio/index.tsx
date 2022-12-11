@@ -1,4 +1,3 @@
-import './Audio.css';
 import { useState } from 'react';
 import { StyledAudioContainer, StyledPause, StyledPlay } from './styled';
 
