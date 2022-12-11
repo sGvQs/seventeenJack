@@ -14,6 +14,8 @@ export const StyledButton = styled.button`
   -moz-transition: 0.5s;
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
+  border-radius: 8px;
+  border: 1px solid transparent;
 
   :disabled {
     opacity: 0.4;

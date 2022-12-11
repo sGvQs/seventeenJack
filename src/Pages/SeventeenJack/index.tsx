@@ -1,17 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '../../Components/common/Button';
-import { Card } from '../../Components/common/Card';
 import { Neon } from '../../Components/common/Neon';
+import { EnemyContainer } from '../../Components/seventeenJack/EnemyContainer';
+import { OurContainer } from '../../Components/seventeenJack/OurContainer';
 import { useSeventeentJackStates } from './hooks';
-import {
-  StyledButtonWrap,
-  StyledCardWrap,
-  StyledContainer,
-  StyledEnemyCardWrap,
-  StyledResultWrap,
-  StyledSingleUnitCards,
-} from './styled';
+import { StyledContainer } from './styled';
 
 export const SeventeenJack = () => {
   const {
@@ -231,89 +223,28 @@ export const SeventeenJack = () => {
       <StyledContainer>
         <Neon label={'SEVENTEEN JACK'} />
         {isStarted && (
-          <EnemyCardContainer
+          <EnemyContainer
             firstSrc={firstSrc}
             secondSrc={secondSrc}
             thirdSrc={thirdSrc}
             fourthSrc={fourthSrc}
           />
         )}
-        {!isStarted ? (
-          <StyledButtonWrap>
-            <Button label={'PLAY'} onClickHandler={() => drowCard(2)} />
-            <Link to={`/`} className="right-content">
-              <Button label={'HOME'} />
-            </Link>
-          </StyledButtonWrap>
-        ) : (
-          <StyledCardWrap>
-            <StyledSingleUnitCards>
-              <Card
-                isSelected={isleftSelected}
-                onClickHandler={() => setIsLeftSelected((current) => !current)}
-                src={leftCardSrc}
-                enemy={false}
-              />
-              <Card
-                isSelected={isRightSelected}
-                onClickHandler={() => setIsRightSelected((current) => !current)}
-                src={rightCardSrc}
-                enemy={false}
-              />
-            </StyledSingleUnitCards>
-          </StyledCardWrap>
-        )}
-        {result ? (
-          <StyledResultWrap>
-            <Neon label={result} />
-            <Button label={'BACK TO TITLE'} onClickHandler={refrash} />
-          </StyledResultWrap>
-        ) : (
-          isStarted && (
-            <StyledButtonWrap>
-              <Button
-                id="changeButton"
-                label={'CHANGE'}
-                disabled={!isRightSelected && !isleftSelected}
-                onClickHandler={changeCards}
-              />
-              <Button
-                id="openButton"
-                disabled={isRightSelected || isleftSelected}
-                onClickHandler={openCards}
-                label={'OPEN'}
-              />
-            </StyledButtonWrap>
-          )
-        )}
+        <OurContainer
+          isStarted={isStarted}
+          result={result}
+          isleftSelected={isleftSelected}
+          isRightSelected={isRightSelected}
+          leftCardSrc={leftCardSrc}
+          rightCardSrc={rightCardSrc}
+          refrash={refrash}
+          changeCards={changeCards}
+          openCards={openCards}
+          drowCard={drowCard}
+          setIsLeftSelected={setIsLeftSelected}
+          setIsRightSelected={setIsRightSelected}
+        />
       </StyledContainer>
     </div>
-  );
-};
-
-type EnemyCardProps = {
-  firstSrc?: string;
-  secondSrc?: string;
-  thirdSrc?: string;
-  fourthSrc?: string;
-};
-
-export const EnemyCardContainer: React.FC<EnemyCardProps> = ({
-  firstSrc,
-  secondSrc,
-  thirdSrc,
-  fourthSrc,
-}) => {
-  return (
-    <StyledEnemyCardWrap>
-      <StyledSingleUnitCards>
-        <Card isSelected={false} enemy src={firstSrc} />
-        <Card isSelected={false} enemy src={secondSrc} />
-      </StyledSingleUnitCards>
-      <StyledSingleUnitCards>
-        <Card isSelected={false} enemy src={thirdSrc} />
-        <Card isSelected={false} enemy src={fourthSrc} />
-      </StyledSingleUnitCards>
-    </StyledEnemyCardWrap>
   );
 };

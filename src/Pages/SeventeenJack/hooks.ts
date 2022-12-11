@@ -54,18 +54,3 @@ export const useSeventeentJackStates = () => {
     setFirstSrc,
   };
 };
-
-export const useCallApi = () => {
-  const { setDeckId } = useSeventeentJackStates();
-  fetch('https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
-    .then((res) => {
-      const respose = res.json();
-      respose.then((res) => {
-        setDeckId(res.deck_id);
-      });
-    })
-    .catch((e) => {
-      console.error(e);
-      alert('サーバーで予期せぬエラーが発生しました');
-    });
-};

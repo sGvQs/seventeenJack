@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../Components/common/Button';
 import { Neon } from '../../Components/common/Neon';
-import { StyledJackImg, StyledButtonWrap } from './styled';
+import { StyledJackImg, StyledButtonWrap, StyledHome } from './styled';
 
 const Home = () => {
   return (
-    <>
+    <StyledHome>
       <StyledJackImg src="/johnny_automatic_card_trick.svg" />
       <Neon label={'JACK STUDIO'} />
       <StyledButtonWrap>
@@ -19,7 +19,7 @@ const Home = () => {
           <Button label={'COMMING SOON...'} />
         </Link>
       </StyledButtonWrap>
-    </>
+    </StyledHome>
   );
 };
 
