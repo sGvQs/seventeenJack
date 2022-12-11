@@ -13,6 +13,7 @@ import {
 type OurContainerProps = {
   isStarted: boolean;
   result?: string;
+  gameStatus: number;
   isleftSelected: boolean;
   isRightSelected: boolean;
   leftCardSrc?: string;
@@ -32,6 +33,7 @@ export const OurContainer: React.FC<OurContainerProps> = ({
   isRightSelected,
   leftCardSrc,
   rightCardSrc,
+  gameStatus,
   refrash,
   changeCards,
   openCards,
@@ -44,7 +46,7 @@ export const OurContainer: React.FC<OurContainerProps> = ({
       {!isStarted ? (
         <StyledButtonWrap>
           <Button label={'PLAY'} onClickHandler={() => drowCard(2)} />
-          <Link to={`/`} className="right-content">
+          <Link to={`/`}>
             <Button label={'HOME'} />
           </Link>
         </StyledButtonWrap>
@@ -75,13 +77,11 @@ export const OurContainer: React.FC<OurContainerProps> = ({
         isStarted && (
           <StyledButtonWrap>
             <Button
-              id="changeButton"
               label={'CHANGE'}
-              disabled={!isRightSelected && !isleftSelected}
+              disabled={(!isRightSelected && !isleftSelected) || gameStatus > 2}
               onClickHandler={changeCards}
             />
             <Button
-              id="openButton"
               disabled={isRightSelected || isleftSelected}
               onClickHandler={openCards}
               label={'OPEN'}

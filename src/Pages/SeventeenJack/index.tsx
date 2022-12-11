@@ -22,6 +22,8 @@ export const SeventeenJack = () => {
     rightCardSrc,
     deckIdRef,
     leftCardSrc,
+    gameStatus,
+    setGameStatus,
     setDeckId,
     setLeftCardSrc,
     setResult,
@@ -131,6 +133,7 @@ export const SeventeenJack = () => {
   };
 
   const changeCards = () => {
+    setGameStatus((current) => current + 1);
     if (isleftSelected && isRightSelected) {
       drowCard(2);
       return;
@@ -222,6 +225,7 @@ export const SeventeenJack = () => {
     setFourthSrc(undefined);
     setResult(undefined);
     setIsStart(false);
+    setGameStatus(0);
   };
 
   return (
@@ -249,6 +253,7 @@ export const SeventeenJack = () => {
           drowCard={drowCard}
           setIsLeftSelected={setIsLeftSelected}
           setIsRightSelected={setIsRightSelected}
+          gameStatus={gameStatus}
         />
       </StyledContainer>
     </div>

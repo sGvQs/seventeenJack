@@ -22,6 +22,8 @@ export const useSeventeentJackStates = () => {
 
   const [result, setResult] = React.useState<string>();
   const [played, setPlayed] = React.useState<boolean>(false);
+
+  const [gameStatus, setGameStatus] = React.useState<number>(0);
   return {
     firstSrc,
     secondSrc,
@@ -38,6 +40,7 @@ export const useSeventeentJackStates = () => {
     rightCardSrc,
     deckIdRef,
     leftCardSrc,
+    gameStatus,
     setDeckId,
     setLeftCardSrc,
     setResult,
@@ -52,5 +55,6 @@ export const useSeventeentJackStates = () => {
     setIsRightSelected,
     setSecondSrc,
     setFirstSrc,
+    setGameStatus,
   };
 };
