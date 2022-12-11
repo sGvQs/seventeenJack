@@ -9,4 +9,7 @@ export const StyledEnemyCardWrap = styled.div`
   width: 60vw;
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 800px) {
+    width: 70vw;
+  }
 `;

@@ -5,6 +5,9 @@ export const StyledHome = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media screen and (max-width: 800px) {
+    gap: 2em;
+  }
 `;
 
 export const StyledJackImg = styled.img`
