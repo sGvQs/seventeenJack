@@ -177,7 +177,7 @@ export const SeventeenJack = () => {
   React.useEffect(() => {
     setTimeout(() => {
       calculateFinalResult();
-    }, 1500);
+    }, 2000);
   }, [currentEnemyValue]);
 
   const calculateFinalResult = () => {
